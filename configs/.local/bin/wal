@@ -1,0 +1,45 @@
+#!/bin/sh
+
+picture_path=$(find -L ~/Pictures/wallpapers -mindepth 1 -maxdepth 2 -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) | fzf)
+
+if [ -z "$picture_path" ]; then
+    exit 0
+fi
+
+if echo "$picture_path" | grep -E '__noresize\.[A-Za-z]+$'; then
+  swww img "$picture_path" \
+      --transition-type wave \
+      --transition-step 10 \
+      --transition-fps 30 \
+      --transition-bezier .43,1.19,1,.4 \
+      --transition-duration 2
+else
+  fill=$(matugen image "$picture_path" -j strip -m dark | jq -r '.colors.dark.background')
+  swww img "$picture_path" \
+      --fill-color "$fill" \
+      --resize fit \
+      --transition-type wave \
+      --transition-step 10 \
+      --transition-fps 30 \
+      --transition-bezier .43,1.19,1,.4 \
+      --transition-duration 2
+fi
+
+
+sleep 0.5
+makoctl reload
+
+if pgrep tmux 2> /dev/null 1>&2 ; then
+    tmux source ~/.config/tmux/tmux.conf
+fi
+
+pidof waybar >/dev/null && pkill waybar
+pidof rofi >/dev/null
+
+sleep 0.3
+waybar > /dev/null 2>&1 &
+
+if [ -f ~/.local/state/current-wallpaper ]; then
+    rm ~/.local/state/current-wallpaper
+fi
+ln -s "$picture_path" ~/.local/state/current-wallpaper

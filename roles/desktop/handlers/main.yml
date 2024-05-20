@@ -1,0 +1,6 @@
+# vim: ft=yaml.ansible
+
+- name: Enable SDDM
+  ansible.builtin.service:
+    name: sddm
+    enabled: true

@@ -1,0 +1,86 @@
+[templates.ags]
+input_path = '~/.config/matugen/templates/ags.scss'
+output_path = '~/.config/ags/colors.scss'
+mode = "Dark"
+
+[templates.gtk4]
+input_path = '~/.config/matugen/templates/gtk.css'
+output_path = '~/.config/gtk-4.0/gtk.css'
+mode = "Dark"
+
+[templates.gtk3]
+input_path = '~/.config/matugen/templates/gtk.css'
+output_path = '~/.config/gtk-3.0/gtk.css'
+mode = "Dark"
+
+[templates.hypr]
+input_path = '~/.config/matugen/templates/hypr.conf'
+output_path = '~/.config/hypr/colors.conf'
+mode = "Dark"
+
+[templates.hyprlock]
+input_path = '~/.config/matugen/templates/hyprlock.conf'
+output_path = '~/.config/hypr/hyprlock.conf'
+mode = "Dark"
+
+
+[templates.rofi]
+input_path = '~/.config/matugen/templates/rofi.mustache'
+output_path = '~/.config/rofi/colors.rasi'
+mode = "Dark"
+
+[templates.kitty]
+input_path = '~/.config/matugen/templates/kitty.conf'
+output_path = '~/.config/kitty/colors.conf'
+mode = "Dark"
+
+[templates.alacritty]
+input_path = '~/.config/matugen/templates/alacritty.toml'
+output_path = '~/.config/alacritty/colors.toml'
+mode = "Dark"
+
+[templates.mako]
+input_path = '~/.config/matugen/templates/mako.mustache'
+output_path = '~/.config/mako/config'
+mode = "Dark"
+
+[templates.nvim]
+input_path = '~/.config/matugen/templates/nvim.json'
+output_path = '~/.config/nvim/lua/david/dynamic_colors/matugen.json'
+mode = "Dark"
+
+[templates.tmux]
+input_path = '~/.config/matugen/templates/tmux.conf'
+output_path = '~/.config/tmux/colors.conf'
+
+[templates.cava]
+input_path = '~/.config/matugen/templates/cava.conf'
+output_path = '~/.config/cava/config'
+mode = "Dark"
+
+[config]
+reload_apps = true
+set_wallpaper = false
+wallpaper_tool = 'Swww'
+swww_options = [
+    "--transition-type", "center",
+    "--transition-step", "10",
+    "--transition-fps", "30",
+    "--transition-bezier", ".43,1.19,1,.4",
+    "--transition-duration", "2"
+]
+
+[config.colors_to_harmonize]
+red = "#fb4934"
+orange = "#fe8019"
+yellow = "#fabd2f"
+green = "#b8bb26"
+blue = "#83a598"
+cyan = "#94e2d5"
+magenta = "#d3869b"
+
+
+[config.reload_apps_list]
+kitty = true
+gtk_theme = true
+waybar = true

@@ -1,0 +1,24 @@
+# vim: ft=yaml.ansible
+
+- name: Enable docker.service
+  ansible.builtin.service:
+    name: docker.service
+    enabled: true
+    state: started
+
+- name: Install distrobox
+  community.general.pacman:
+    name: distrobox
+    state: present
+
+- name: Setting docker group
+  ansible.builtin.group:
+    name: docker
+    state: present
+  notify: Add `david` to docker group
+
+- name: Add `david` to docker group
+  ansible.builtin.user:
+    name: david
+    append: true
+    group: docker

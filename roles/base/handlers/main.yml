@@ -1,0 +1,33 @@
+# vim: ft=yaml.ansible
+
+- name: Add python plugin
+  become_user: david
+  become: false
+  changed_when: true
+  ansible.builtin.shell:
+    executable: /bin/sh
+    cmd: 'export ASDF_DIR="$HOME/.local/share/asdf"; . "$HOME/.local/share/asdf/asdf.sh"; asdf plugin add python && asdf global python system'
+
+- name: Add java plugin
+  become_user: david
+  become: false
+  changed_when: true
+  ansible.builtin.shell:
+    executable: /bin/sh
+    cmd: 'export ASDF_DIR="$HOME/.local/share/asdf"; . "$HOME/.local/share/asdf/asdf.sh"; asdf plugin add java && asdf global python system'
+
+- name: Add javascript plugin
+  become_user: david
+  become: false
+  changed_when: true
+  ansible.builtin.shell:
+    executable: /bin/sh
+    cmd: 'export ASDF_DIR="$HOME/.local/share/asdf"; . "$HOME/.local/share/asdf/asdf.sh"; asdf plugin add nodejs && asdf global python system'
+
+- name: Add asdf direnv integration
+  become_user: david
+  become: false
+  changed_when: true
+  ansible.builtin.shell:
+    executable: /bin/sh
+    cmd: 'export ASDF_DIR="$HOME/.local/share/asdf"; . "$HOME/.local/share/asdf/asdf.sh"; asdf plugin add direnv'

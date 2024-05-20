@@ -1,0 +1,20 @@
+# vim: ft=yaml.ansible
+- hosts: local
+  connection: local
+  become: true
+  roles:
+    - base
+    - desktop
+    - gaming
+    - music
+    - virtualization
+
+  post_tasks:
+    - name: Revoke `sudo pacman` without a password to `david`
+      ansible.builtin.lineinfile:
+        path: /etc/sudoers.d/11-install-aur_builder
+        line: 'david ALL=(ALL) NOPASSWD: /usr/bin/pacman'
+        create: true
+        state: absent
+        mode: '0644'
+        validate: 'visudo -cf %s'

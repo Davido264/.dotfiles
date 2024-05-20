@@ -1,0 +1,19 @@
+#!/bin/sh
+
+if [ "$1" = "list" ] || [ "$1" = "history" ]; then
+    cmd=$1
+elif [ $# -eq 0 ]; then
+    cmd="list"
+else
+    echo "Invalid arguments. only 'history' or 'list' (default)" >&2
+    exit 1
+fi
+
+selection=$(rofi -theme-str 'window {height: 50%; width: 50%; fullscreen: true;} mainbox { children: ["inputbar", "listview", "message"]; }' -dmenu < <(makoctl $cmd | jq '.data[] | map("[\(.id.data)] \(.summary.data) \(.body.data)")'  | sed -e 's/web\.whatsapp\.com\\n\\n//g' | jq '.[]' -r))
+id=$(echo $selection | grep -oP '\[[0-9]+\]' | grep -oP '[0-9]+')
+
+if [ -z $id ]; then
+    exit 0
+fi
+
+makoctl invoke -n $id

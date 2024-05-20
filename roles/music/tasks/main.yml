@@ -1,0 +1,4 @@
+# vim: ft=yaml.ansible
+
+- name: Install games
+  ansible.builtin.import_tasks: "software/music.yml"

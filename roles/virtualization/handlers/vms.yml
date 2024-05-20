@@ -1,0 +1,44 @@
+# vim: ft=yaml.ansible
+
+- name: Enable libvirt service
+  ansible.builtin.service:
+    name: libvirtd
+    enabled: true
+    state: started
+
+- name: Enable nested virtualization
+  ansible.builtin.lineinfile:
+    path: /etc/modprobe.d/nested.conf
+    line: options kvm_intel nested=1
+    mode: '0644'
+    create: true
+    state: present
+
+- name: Add user to /etc/libvirt/libvirtd.conf
+  ansible.builtin.lineinfile:
+    path: /etc/libvirt/libvirtd.conf
+    regexp: '^#unix_sock_group = "libvirt"'
+    line: 'unix_sock_group = "libvirt"'
+
+- name: Add kvm group to /etc/libvirt/qemu.conf
+  ansible.builtin.lineinfile:
+    path: /etc/libvirt/qemu.conf
+    regexp: '^#group = "libvirt-qemu"'
+    line: 'group = "kvm"'
+
+- name: Setting libvirt and kvm groups
+  ansible.builtin.group:
+    name: '{{ item }}'
+    state: present
+  loop:
+    - libvirtd
+    - kvm
+  notify: Add `david` to libvirt and kvm groups
+
+- name: Add `david` to libvirt and kvm  groups
+  ansible.builtin.user:
+    name: david
+    append: true
+    groups:
+      - libvirtd
+      - kvm

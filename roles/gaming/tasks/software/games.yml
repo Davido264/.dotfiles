@@ -1,0 +1,23 @@
+# vim: ft=yaml.ansible
+
+- name: Install lutris
+  community.general.pacman:
+    name: lutris
+    state: present
+  notify: Download custom icons
+
+- name: Install PrismLauncher (AUR)
+  become: true
+  become_user: david
+  kewlfft.aur.aur:
+    name: prismlauncher
+    state: present
+
+- name: Install Osu! (AUR)
+  become: true
+  become_user: david
+  kewlfft.aur.aur:
+    name: osu-lazer-bin
+    state: present
+
+# - name: Super Smash Flash 2 (TODO)

@@ -1,0 +1,59 @@
+# vim: ft=yaml.ansible
+
+- name: Enable multilib (1/2)
+  ansible.builtin.lineinfile:
+    path: /etc/pacman.conf
+    regexp: '^#[multilib]'
+    line: '[multilib]'
+    state: present
+
+- name: Enable multilib (2/2)
+  ansible.builtin.lineinfile:
+    path: /etc/pacman.conf
+    regexp: '^#Include = /etc/pacman.d/mirrorlist'
+    line: 'Include = /etc/pacman.d/mirrorlist'
+    state: present
+
+- name: Install 32bit pipewire libs
+  community.general.pacman:
+    name:
+      - pipewire-pulse
+    state: present
+
+- name: Install Optional dependencies
+  community.general.pacman:
+    name:
+      - lib32-gnutls # Encryption support
+      - lib32-sdl2 # Joystick and gamepad
+      - samba # NTLM authentication
+    state: present
+
+- name: Install vulkan an other graphical dependencies
+  community.general.pacman:
+    name:
+      - vulkan-headers
+      - vulkan-icd-loader
+      - vulkan-validation-layers
+      - vulkan-intel
+      - lib32-vulkan-intel
+      - vulkan-tools
+    state: present
+
+- name: Install even more dependencies
+  community.general.pacman:
+    name:
+      - libadwaita
+    state: present
+
+- name: Install mangohud monitor
+  community.general.pacman:
+    name: mangohud
+    state: present
+
+- name: Install wine
+  community.general.pacman:
+    name: wine
+    state: present
+
+- name: Install games
+  ansible.builtin.import_tasks: "software/games.yml"

@@ -1,0 +1,24 @@
+# vim: ft=yaml.ansible
+
+- name: Download custom icons
+  ansible.builtin.file:
+    path: /home/david/.local/share/icons/lutris
+    state: directory
+    recurse: true
+    owner: david
+    group: david
+    mode: '0755'
+  notify: Fetch icons
+
+- name: Fetch icons
+  ansible.builtin.get_url:
+    dest: '{{ item.dest }}'
+    url: '{{ item.url }}'
+    checksum: '{{ item.checksum }}'
+    owner: david
+    group: david
+    mode: '0644'
+  loop:
+    - dest: /home/david/.local/share/icons/lutris/an-anime-game-launcher.png
+      url: https://raw.githubusercontent.com/an-anime-team/an-anime-game-launcher/main/assets/images/icon.png
+      checksum: sha256:e2e7bfcf3c09773042372baa158119233d5c2157321f08725ff8c0c313eef774

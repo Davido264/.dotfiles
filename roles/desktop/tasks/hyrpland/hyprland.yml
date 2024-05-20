@@ -1,0 +1,147 @@
+# vim: ft=yaml.ansible
+
+- name: Install base utils
+  community.general.pacman:
+    name:
+      - base-devel
+      - dbus
+      - rtkit # RealTime as needed (security)
+      - polkit
+    state: present
+
+- name: Install pipewire pkgs
+  community.general.pacman:
+    name:
+      - pipewire
+      - wireplumber
+      - pipewire-audio
+      - pipewire-alsa # Pipewire alsa support
+      - pipewire-pulse
+    state: present
+
+- name: Install Hyprland pkgs
+  community.general.pacman:
+    name:
+      - cliphist
+      - curl
+      - grim
+      - gvfs # Gnome virtual file system
+      - gvfs-mtp  # android access on file manager
+      - hypridle
+      - hyprlock
+      - imagemagick
+      - jq
+      - kitty
+      - kvantum
+      - network-manager-applet
+      - pamixer
+      - pavucontrol
+      - playerctl
+      - polkit-kde-agent
+      - python-requests
+      - python-pyquery
+      - qt5ct
+      - qt5-wayland
+      - qt6ct
+      - qt6-svg
+      - qt6-wayland
+      - rofi-wayland
+      - slurp
+      - sound-theme-freedesktop
+      - swappy
+      - mako
+      - waybar
+      - wget
+      - wl-clipboard
+      - xclip
+      - xdg-desktop-portal-gtk
+      - xdg-desktop-portal-hyprland
+      - xdg-user-dirs
+      - xdg-utils
+      - yad
+      - brightnessctl
+      - eog # Image viewer
+      - mpv
+      - mpv-mpris
+      - nvtop
+      - hyprland # THE GOAT
+    state: present
+
+- name: Install Hyprland pkgs (AUR)
+  become: true
+  become_user: david
+  kewlfft.aur.aur:
+    name:
+      - matugen-bin
+      - nwg-displays
+      - nwg-look-bin
+      - swww
+    state: present
+
+- name: Install fonts
+  community.general.pacman:
+    name:
+      - adobe-source-code-pro-fonts
+      - noto-fonts-emoji
+      - cantarell-fonts
+      - otf-font-awesome
+      - ttf-droid
+      - ttf-fira-code
+      - ttf-jetbrains-mono
+      - ttf-jetbrains-mono-nerd
+      - ttf-mononoki-nerd
+      - otf-comicshanns-nerd
+    state: present
+
+# TODO: This requires an iso from MS Windows or a CD of Office 2007
+# - name: Install MS Fonts (AUR)
+#   become: true
+#   become_user: david
+#   kewlfft.aur.aur:
+#     name:
+#       - ttf-ms-win11
+#       - ttf-office-2007-fonts
+#     state: present
+
+- name: Install Bluethooth utils
+  community.general.pacman:
+    name:
+      - bluez
+      - bluez-utils
+      - blueman
+    state: present
+
+- name: Ensure bluetooth active
+  ansible.builtin.service:
+    name: bluetooth
+    enabled: true
+    state: started
+
+- name: Install GTK themes (AUR)
+  become: true
+  become_user: david
+  kewlfft.aur.aur:
+    name:
+      - adw-gtk3
+      - bibata-cursor-theme
+      - quintom-cursor-theme-git
+      - colloid-icon-theme-git
+    state: present
+
+
+- name: Set default colorscheme
+  become_user: david
+  become: true
+  community.general.dconf:
+    key: /org/gnome/desktop/interface/color-scheme
+    value: "'prefer-dark'"
+
+- name: Install SDDM
+  community.general.pacman:
+    name:
+      - qt6-5compat
+      - qt6-declarative
+      - qt6-svg
+      - sddm
+  notify:
+    - Enable SDDM

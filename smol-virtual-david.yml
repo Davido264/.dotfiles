@@ -1,0 +1,48 @@
+# vim: ft=yaml.ansible
+- name: Smol David vm
+  hosts: vm
+  become: true
+  # TODO?
+  # roles:
+  #   - base
+  #   - desktop
+  #   - gaming
+  #   - music
+  #   - virtualization
+
+  tasks:
+    - name: Update pkgs
+      ansible.builtin.dnf:
+        update_cache: true
+        update_only: true
+        state: present
+
+    - name: Install cool and funny pkgs
+      ansible.builtin.dnf:
+        name:
+          - fzf
+          - fastfetch
+          - jq
+          - cowsay
+          - nethogs
+          - lsof
+          - git
+          - tmux
+          - htop
+        state: present
+
+    - name: Enable virtualization
+      ansible.builtin.dnf:
+        name: '@Virtualization'
+        state: present
+      notify: Start services
+
+  handlers:
+    - name: Start services
+      ansible.builtin.service:
+        name: '{{ item }}'
+        enabled: true
+        state: started
+      loop:
+        - podman
+        - libvirtd

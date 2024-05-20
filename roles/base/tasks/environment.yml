@@ -1,0 +1,24 @@
+# vim: ft=yaml.ansible
+
+- name: Set default editor in /etc/environment (vim is superior)
+  ansible.builtin.lineinfile:
+    path: /etc/environment
+    regexp: '^EDITOR=.*'
+    line: 'EDITOR=nvim'
+    state: present
+
+- name: Include XDG Variables in /etc/security/pam_env.conf
+  ansible.builtin.blockinfile:
+    path: /etc/security/pam_env.conf
+    block: |
+      XDG_CONFIG_HOME   DEFAULT=@{HOME}/.config
+      XDG_CACHE_HOME    DEFAULT=@{HOME}/.cache
+      XDG_DATA_HOME     DEFAULT=@{HOME}/.local/share
+      XDG_STATE_HOME     DEFAULT=@{HOME}/.local/state
+    state: present
+
+- name: Set fzf default options
+  ansible.builtin.lineinfile:
+    path: /etc/environment
+    line: 'FZF_DEFAULT_OPTS="--delimiter=\t --exit-0 --select-1  --bind=ctrl-z:ignore,btab:up,tab:down --cycle --keep-right --height=50% --info=inline --layout=reverse --tabstop=1 --color 16"'
+    state: present

@@ -1,0 +1,91 @@
+# vim: ft=yaml.ansible
+
+- name: Set Timezone
+  community.general.timezone:
+    name: America/Guayaquil
+
+- name: Setup Locale
+  community.general.locale_gen:
+    name: es_MX.UTF-8
+    state: present
+
+- name: Ensure udev
+  community.general.pacman:
+    name:
+      - udev
+      - android-udev
+    state: present
+
+- name: Map HOME_PAGE -> ESC
+  ansible.builtin.copy:
+    src: btkb_homepage_to_esc
+    dest: /etc/udev/hwdb.d/99-btkb_homepage_to_esc.hwdb
+    owner: root
+    mode: '0644'
+
+- name: Use Altgr and Caps -> Ctrl
+  ansible.builtin.copy:
+    src: xkb.layout
+    dest: /etc/X11/xorg.conf.d/99-keymaps.conf
+    owner: root
+    group: root
+    mode: '0444'
+
+- name: Install zsh
+  community.general.pacman:
+    name: zsh
+    state: present
+
+- name: Setting necesary groups
+  ansible.builtin.group:
+    name: '{{ item }}'
+    state: present
+  loop:
+    - networkmanager
+    - input
+    - audio
+    - power
+
+- name: Setting david user
+  ansible.builtin.user:
+    name: david
+    shell: /usr/bin/zsh
+    groups:
+      - users
+      - wheel
+      - audio
+      - networkmanager
+      - input
+      - audio
+      - power
+
+- name: Grant `sudo pacman` without a password to `david`
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/11-install-aur_builder
+    line: 'david ALL=(ALL) NOPASSWD: /usr/bin/pacman'
+    state: present
+    create: true
+    mode: '0644'
+    validate: 'visudo -cf %s'
+
+- name: Install utils
+  community.general.pacman:
+    name:
+      - wget
+      - zip
+      - unzip
+      - nethogs
+      - coreutils
+      - base-devel
+      - namcap
+
+- name: Install Shell and CLI Apps
+  ansible.builtin.import_tasks: "software/shell.yml"
+
+- name: Install Language tooling
+  ansible.builtin.import_tasks: "software/programming-languages.yml"
+
+- name: Set XDG variables
+  ansible.builtin.import_tasks: "environment.yml"
+
+# localectl set-keymap us-acentos

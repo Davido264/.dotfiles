@@ -1,0 +1,7 @@
+# vim: ft=yaml.ansible
+
+- name: Aditional container settings
+  ansible.builtin.import_tasks: "containers.yml"
+
+- name: Aditional vm settings
+  ansible.builtin.import_tasks: "vms.yml"

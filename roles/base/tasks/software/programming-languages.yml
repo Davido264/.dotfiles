@@ -1,0 +1,116 @@
+# vim: ft=yaml.ansible
+
+- name: Install C/C++ Tooling
+  community.general.pacman:
+    name:
+      - base-devel
+      - gcc
+      - glibc
+      - clang
+      - llvm
+      - make
+      - cmake
+      - autoconf
+      - automake
+      - gdb
+    state: present
+
+
+- name: Install Clojure Tooling
+  community.general.pacman:
+    name:
+      - clojure
+    state: present
+
+
+# - name: Install .NET Tooling
+#   community.general.pacman:
+#     name:
+#       - dotnet-sdk
+#     state: present
+
+
+# - name: Install Dart Tooling
+#   community.general.pacman:
+#     name:
+#       - dart
+#     state: present
+# - name: Install Dart Tooling (AUR)
+#   become: true
+#   become_user: david
+#   kewlfft.aur.aur:
+#     name:
+#       - flutter
+#     state: present
+
+
+# - name: Install F# Tooling
+#   community.general.pacman:
+#     name:
+
+- name: Install Go Tooling
+  community.general.pacman:
+    name: go
+    state: present
+
+
+- name: Install Java Tooling
+  community.general.pacman:
+    name:
+      - jdk21-openjdk
+      - jdk8-openjdk
+    state: present
+
+
+- name: Install JS Tooling
+  community.general.pacman:
+    name:
+      - nodejs-lts-hydrogen
+      - npm
+      - pnpm
+    state: present
+
+
+- name: Install Kotlin Tooling
+  community.general.pacman:
+    name:
+      - kotlin
+    state: present
+
+# TODO: Install spyglassmc
+
+- name: Install Python Tooling
+  community.general.pacman:
+    name:
+      - python
+      - python-requests
+      - python-numpy
+      - python-ipykernel
+      - python-ipympl
+      - python-ipywidgets
+    state: present
+
+
+- name: Install Rust Tooling
+  community.general.pacman:
+    name:
+      - rustup
+    state: present
+
+
+- name: Install asdf
+  become_user: david
+  become: false
+  ansible.builtin.git:
+    accept_hostkey: true
+    repo: https://github.com/asdf-vm/asdf.git
+    dest: /home/david/.local/share/asdf
+    version: v0.14.0
+  notify:
+    - Add python plugin
+    - Add java plugin
+    - Add javascript plugin
+    - Add asdf direnv integration
+
+
+# TODO: LaTeX

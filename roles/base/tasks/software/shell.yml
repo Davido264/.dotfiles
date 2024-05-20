@@ -1,0 +1,62 @@
+# vim: ft=yaml.ansible
+
+- name: Install yay
+  kewlfft.aur.aur:
+    name: yay
+    state: present
+
+- name: Install shell applications
+  community.general.pacman:
+    name:
+      - cmatrix
+      - cowsay
+      - direnv
+      - eza
+      - fastfetch
+      - fortune-mod
+      - fzf
+      - git
+      - gum
+      - jq
+      - starship
+      - stow
+      - uwufetch
+      - zsh
+      - zsh-completions
+      - zsh-syntax-highlighting
+    state: present
+
+- name: Install shell applications (AUR)
+  become: true
+  become_user: david
+  kewlfft.aur.aur:
+    name:
+      - pipes.sh
+    state: present
+
+- name: Install cli utils
+  community.general.pacman:
+    name:
+      - p7zip
+      - android-tools
+      - bitwarden-cli
+      - daktilo
+      - git
+      - nmap
+      - pandoc-cli
+      - rclone
+      - tmux
+      - htop
+      - btop
+      - yt-dlp
+      - graphviz
+      - ripgrep # required for neovim
+    state: present
+
+- name: Install Neovim Nightly (bleething edge >:])
+  become: true
+  become_user: david
+  kewlfft.aur.aur:
+    name:
+      - neovim-nightly-bin
+    state: present

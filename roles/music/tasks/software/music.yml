@@ -1,0 +1,38 @@
+# vim: ft=yaml.ansible
+
+- name: Install ardour
+  community.general.pacman:
+    name: ardour
+    state: present
+
+- name: Install furnace
+  community.general.pacman:
+    name: furnace
+    state: present
+
+- name: Install giada (AUR)
+  become: true
+  become_user: david
+  kewlfft.aur.aur:
+    name: giada
+    state: present
+
+- name: Install music plugins
+  community.general.pacman:
+    name:
+      - cardinal
+      - odin2-synthesizer
+      - surge-xt
+      - zynaddsubfx
+    state: present
+
+
+- name: Install music plugins (AUR)
+  become: true
+  become_user: david
+  kewlfft.aur.aur:
+    name:
+      - chowtapemodel-bin
+      - vital-synth
+      - tal-noisemaker-bin # :O
+    state: present

@@ -1,0 +1,149 @@
+# vim: ft=yaml.ansible
+
+- name: Install Desktop apps (Browser)
+  community.general.pacman:
+    name:
+      - firefox
+    state: present
+
+# - name: Install Desktop apps (Browser, AUR)
+#   become: true
+#   become_user: david
+#   kewlfft.aur.aur:
+#     name:
+#       - brave-bin
+#     state: present
+
+
+- name: Install Desktop apps (Communication)
+  community.general.pacman:
+    name:
+      - telegram-desktop
+      - thunderbird
+    state: present
+
+- name: Install Desktop apps (Communication, AUR)
+  become: true
+  become_user: david
+  kewlfft.aur.aur:
+    name:
+      - vesktop-bin
+      #      - zoom
+    state: present
+
+
+# - name: Install Desktop apps (Devel)
+#   community.general.pacman:
+#     name:
+#       #      - wireshark-qt
+#       #      - glade
+#     state: present
+
+# - name: Install Desktop apps (Devel, AUR)
+#   become: true
+#   become_user: david
+#   kewlfft.aur.aur:
+#     name:
+#       - android-studio
+#       - visual-studio-code-bin
+#     state: present
+
+
+# - name: Install Desktop apps (Drawing)
+#   community.general.pacman:
+#     name:
+#       #      - krita
+#       #      - inkscape
+#       #      - blender
+#     state: present
+
+- name: Install Desktop apps (Drawing, AUR)
+  become: true
+  become_user: david
+  kewlfft.aur.aur:
+    name:
+      - drawio-desktop-bin
+    state: present
+
+
+- name: Install Desktop apps (LibreOffice)
+  community.general.pacman:
+    name:
+      - libreoffice-fresh
+      - libreoffice-fresh-es
+      - libreoffice-fresh-en-gb
+    state: present
+
+
+# TODO: Install autoload and thumbnail scripts
+- name: Install Desktop apps (MPV)
+  community.general.pacman:
+    name:
+      - mpv
+    state: present
+
+
+# - name: Install Desktop apps (OBS) (TODO)
+#   community.general.pacman:
+#     name:
+#       #      - obs-studio
+#     state: present
+
+
+- name: Install Desktop apps (Scrcpy)
+  community.general.pacman:
+    name:
+      - scrcpy
+    state: present
+
+
+# - name: Install Desktop apps (Obsidian)
+#   community.general.pacman:
+#     name:
+#       - obsidian
+#     state: present
+
+
+- name: Install Desktop apps (spotify, AUR)
+  become: true
+  become_user: david
+  kewlfft.aur.aur:
+    name:
+      - spotify
+    state: present
+
+
+- name: Install Desktop apps (Terminal)
+  community.general.pacman:
+    name:
+      - alacritty
+      - kitty
+      - foot # maybe?
+    state: present
+
+
+- name: Install Thunar
+  community.general.pacman:
+    name:
+      - thunar
+      - thunar-volman
+      - tumbler
+      - ffmpegthumbnailer
+      - thunar-archive-plugin
+    state: present
+
+
+- name: Install Desktop apps (Universal Android Debloater, AUR)
+  become: true
+  become_user: david
+  kewlfft.aur.aur:
+    name:
+      - universal-android-debloater
+    state: present
+
+
+- name: Install Desktop apps (Zathura)
+  community.general.pacman:
+    name:
+      - zathura
+    state: present

@@ -1,0 +1,7 @@
+# vim: ft=yaml.ansible
+
+- name: Install Hyrpland
+  ansible.builtin.import_tasks: "hyrpland/hyprland.yml"
+
+- name: Install Graphical Desktop Common Apps
+  ansible.builtin.import_tasks: "software/desktop-apps.yml"

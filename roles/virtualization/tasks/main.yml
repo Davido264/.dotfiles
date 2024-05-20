@@ -1,0 +1,32 @@
+# vim: ft=yaml.ansible
+
+- name: Install docker
+  community.general.pacman:
+    name:
+      - docker
+      - docker-buildx
+      - docker-compose
+    state: present
+  notify:
+    - Enable docker.service
+    - Install distrobox
+    - Setting docker group
+
+- name: Install KVM, libvirt, guesttools and virt-manager
+  community.general.pacman:
+    name:
+      - libvirt
+      - guestfs-tools
+      - libguestfs
+      - virt-manager
+      - dnsmasq         # (opt) required for default NAT/DHCP for guests
+      - iptables-nft    # (opt) required for default NAT networking
+      - lvm2            # (opt) Logical Volume Manager support
+      - openbsd-netcat  # (opt) for remote management over ssh
+    state: present
+  notify:
+    - Enable libvirt service
+    - Enable nested virtualization
+    - Setting libvirt and kvm groups
+    - Add user to /etc/libvirt/libvirtd.conf
+    - Add kvm group to /etc/libvirt/qemu.conf

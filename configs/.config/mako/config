@@ -1,0 +1,42 @@
+# vim: ft=dosini
+width=300
+height=150
+padding=20
+margin=20
+border-size=3
+font=Cantarell 11
+text-color=#f1dfdb
+border-color=#ffb4a6
+background-color=#1a1110
+progress-color=over #733429
+default-timeout=15000
+
+max-visible=5
+sort=-time
+layer=top
+anchor=top-center
+margin=10,0,0,0
+border-radius=10
+
+text-alignment=center
+icons=1
+max-icon-size=64
+icon-path=/usr/share/icons/flattrcolor-dark/:/usr/share/icons/flattrcolor-dark/devices/scalable/
+default-timeout=2400
+ignore-timeout=0
+group-by=none
+invisible=0
+on-button-middle=exec makoctl menu -n "$id" rofi -dmenu -p 'Select action: '
+on-button-right=exec makoctl menu -n "$id" $HOME/Downloads/temp/test.sh
+
+[mode=do-not-disturb]
+invisible=1
+on-notify=none
+
+[mode=silent]
+on-notify=none
+
+
+# format=<b>%s</b>\n%b
+# format=<span color="#ffb4a6" size="13pt" line_height="1.4"><b>%a</b></span>\n<span color="#f1dfdb"><i>%s</i></span>\n<tt>%b</tt>
+
