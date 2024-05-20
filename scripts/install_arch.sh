@@ -25,7 +25,7 @@ ansible-playbook -K local.yml
 
 if [ ! -f ._not_first_time ]; then
 	stow -t "$HOME" --adopt configs
-	git restore dotfiles
+	git restore configs
 else
 	stow -t "$HOME" configs
 fi

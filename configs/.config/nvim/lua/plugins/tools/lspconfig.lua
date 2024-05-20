@@ -57,7 +57,7 @@ return {
 
     local lspconfig = require "lspconfig"
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-    local server_configs = require "david.lsp.server_configs"
+    local server_configs = require "david.lsp.custom_server_configs"
     local defaults = {
       capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities),
     }
@@ -66,7 +66,7 @@ return {
       if type(opts.setup[server]) == "function" then
         opts.setup[server]()
       elseif opts.setup[server] ~= false then
-        local config = vim.tbl_deep_extend("force", defaults, server_configs[server] or {})
+        local config = vim.tbl_deep_extend("force", defaults, server_configs(server))
         lspconfig[server].setup(config)
       end
     end

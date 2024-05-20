@@ -48,6 +48,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     map("n", "<leader>vca", vim.lsp.buf.code_action, opts)
 
+    map("n", "<leader>vih", function()
+      if vim.lsp.inlay_hint.is_enabled {} then
+        vim.lsp.inlay_hint.enable(false)
+        require("fidget").notify "inlay hints disabled"
+      else
+        vim.lsp.inlay_hint.enable(true)
+        require("fidget").notify "inlay hints enabled"
+      end
+    end, opts)
+
     map("n", "gl", vim.diagnostic.open_float, opts)
 
     map("n", "[d", vim.diagnostic.goto_prev, opts)

@@ -90,6 +90,12 @@ function M.setup()
                 profile = "GoogleStyle",
               },
             },
+            inlayHints = {
+              parameterNames = {
+                enabled = "all",
+                exclusions = { "this" },
+              },
+            },
           },
         },
         signatureHelp = { enabled = true },

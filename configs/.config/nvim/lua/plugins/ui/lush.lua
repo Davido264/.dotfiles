@@ -3,6 +3,6 @@ return {
   lazy = false,
   init = function()
     local m = require "david.dynamic_colors.lush"
-    require "lush"(m.lush())
+    require "lush"(m)
   end,
 }

@@ -20,6 +20,7 @@ set.wrap = false
 set.hlsearch = false
 set.ignorecase = true
 set.splitright = true
+gset.editorconfig = true
 
 -- default tab behaviour
 set.expandtab = true

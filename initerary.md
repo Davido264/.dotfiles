@@ -6,8 +6,11 @@
 
 - Create installation script
 
+- [ ] Check editorconfig support on NVIM
 
-- Setup a final waybar config
+- [ ] Setup a final waybar config
+    - [ ] Add gtk native icons to waybar (need to modify source code)
+    - Is ags a better option overall? 🤔
 
 
 # Require more planing
@@ -16,6 +19,7 @@
     - latex templates
     - learn to latex properly
     - maybe pandoc properly?
+
 
 
 # Maybe?
