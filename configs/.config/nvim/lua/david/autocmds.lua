@@ -34,10 +34,14 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "markdown", "tex", "gitcommit" },
   callback = function()
-    require("david.keymaps").bmap("n", "<leader>z", function()
-      require("david.telescope").spell()
-    end, { silent = true })
+    require("david.keymaps").bmap("n", "z=", "<Cmd>Telescope spell_suggest<CR>", { silent = true })
     local set = vim.opt_local
+    set.spell = true
+    set.spelllang = { "en", "es" }
+    set.spellfile = {
+      vim.fn.stdpath "config" .. "/spell/es.utf-8.add",
+      vim.fn.stdpath "config" .. "/spell/en.utf-8.add",
+    }
     set.wrap = true
     set.linebreak = true
     set.breakindent = true

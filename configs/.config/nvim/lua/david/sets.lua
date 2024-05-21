@@ -1,7 +1,9 @@
 local set = vim.opt
 local gset = vim.g
 
+-- leader
 gset.mapleader = " "
+gset.maplocalleader = ","
 
 -- file format
 set.fileformat = "unix"
@@ -116,3 +118,8 @@ gset.netrw_winsize = 25
 gset.neovide_cursor_vfx_mode = "wireframe"
 gset.neovide_transparency = 0.95
 set.guifont = "Mononoki NF:h13"
+
+-- folds
+set.foldmethod = "expr"
+set.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+set.foldenable = false

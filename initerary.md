@@ -1,36 +1,23 @@
 # Stuff to do
 - Backup all (using cloud-drive)
-- Organize wallpapers
-- Refactor tmux config to delete ensure sensible and vim-tmux runs once
 - See rofi for network settings (replace nm-applet and blueman-applet)
-
-- Create installation script
-
-- [ ] Check editorconfig support on NVIM
 
 - [ ] Setup a final waybar config
     - [ ] Add gtk native icons to waybar (need to modify source code)
     - Is ags a better option overall? 🤔
 
 
-# Require more planing
-- Setup LaTeX writting setup on neovim
-    - spellchecker
-    - latex templates
-    - learn to latex properly
-    - maybe pandoc properly?
-
-
-
 # Maybe?
-- Merge last 3 commits of my fork of treesitter for F# and push to master
-- A better tool for reproducible and temporal devenvs (nix was a pain)
 - create queries for mcfunction
-- modularize and rewrite nvim config to have dev config toggable
 
 
 # To check out later
 https://github.com/firecat53/networkmanager-dmenu
+
+# Long term
+- latex templates
+- learn to latex properly
+- maybe pandoc properly?
 
 
 # Project queue

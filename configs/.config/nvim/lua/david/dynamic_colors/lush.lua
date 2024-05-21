@@ -81,7 +81,7 @@ local theme = lush(function(injected_functions)
     --    QuickFixLine                           {},
     Search { CurSearch },
     SpecialKey { fg = colors.outline },
-    SpellBad {  fg = colors.red, BoldUndercurl },
+    SpellBad {  BoldUndercurl },
     SpellCap { Undercurl },
     SpellLocal { Undercurl },
     SpellRare { Undercurl },

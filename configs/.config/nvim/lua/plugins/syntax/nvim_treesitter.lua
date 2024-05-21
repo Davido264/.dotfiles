@@ -2,7 +2,116 @@ return {
   "nvim-treesitter/nvim-treesitter",
   event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   cmd = { "TSInstall", "TSInstallSync", "TSInstallInfo", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
+  build = ":TSUpdate",
   opts = {
+    ensure_installed = {
+      -- Bash/sh
+      "bash",
+
+      -- C/C++
+      "c",
+      "cpp",
+      "llvm",
+
+      -- Clojure/babashka
+      "clojure",
+
+      -- Go
+      "go",
+      "gotmpl",
+      "gowork",
+
+      -- Java
+      "java",
+      "groovy",
+
+      -- Kotlin
+      "kotlin",
+
+      -- Lua
+      "lua",
+      "luadoc",
+      "luap",
+      "luau",
+
+      -- C#
+      "c_sharp",
+
+      -- Python
+      "python",
+      "requirements",
+      "pymanifest",
+
+      -- LaTeX
+      "bibtex",
+
+      -- Javascript/Typescript
+      "javascript",
+      "jsdoc",
+      "typescript",
+
+      -- Web Frameworks
+      "svelte",
+      "tsx",
+      "htmldjango",
+      "angular",
+      "astro",
+      "embedded_template",
+      "vue",
+
+      -- HTML/CSS/JSON/YAML/TOML
+      "html",
+      "scss",
+      "css",
+      "yaml",
+      "json",
+      "json5",
+      "jsonc",
+      "toml",
+
+      -- Rust
+      "rust",
+
+      -- Dart
+      "dart",
+
+      -- Markdown
+      "markdown",
+      "markdown_inline",
+
+      -- SQL
+      "sql",
+
+      -- Git
+      "diff",
+      "git_config",
+      "git_rebase",
+      "gitattributes",
+      "gitcommit",
+      "gitignore",
+
+      -- Other
+      "bass",
+      "beancount",
+      "cmake",
+      "comment",
+      "cooklang",
+      "csv",
+      "dockerfile",
+      "http",
+      "hyprlang",
+      "ini",
+      "make",
+      "meson",
+      "query",
+      "regex",
+      "scheme",
+      "templ",
+      "tsv",
+      "vim",
+      "vimdoc",
+      "xml",
+    },
     highlight = {
       enable = true,
       additional_vim_regex_highlighting = false,
@@ -12,9 +121,6 @@ return {
       disable = {},
     },
     matchup = {
-      enable = true,
-    },
-    autotag = {
       enable = true,
     },
   },
