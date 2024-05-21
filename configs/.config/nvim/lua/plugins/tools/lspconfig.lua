@@ -36,6 +36,13 @@ return {
   config = function(_, opts)
     require "david.lsp.lsp_attach"
 
+    local extra_servers = require "david.lsp.extra_servers"
+
+    for key, value in pairs(extra_servers) do
+      require("lspconfig.configs")[key] = value
+    end
+
+
     local _border = "rounded"
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
       border = _border,

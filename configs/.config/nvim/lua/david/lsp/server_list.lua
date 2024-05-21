@@ -51,4 +51,8 @@ return {
   -- "prismals",
   -- Minecraft mcfunction
   -- "spyglassmc_language_server",
+
+  -- Not managed by lspconfig
+  "odoo_lsp", -- Odoo language server
+  -- "termux_language_server"
 }

@@ -66,6 +66,40 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter", "BufNewFile" }, {
   end,
 })
 
+-- define ft for termux-language-server to terraform
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter", "BufNewFile" }, {
+  pattern = {
+    "build.sh",
+    "*.subpackage.sh",
+  },
+  callback = function()
+    vim.opt_local.filetype = "sh.termux"
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter", "BufNewFile" }, {
+  pattern = {
+    "PKGBUILD",
+    "*.install",
+    "makepkg.conf",
+  },
+  callback = function()
+    vim.opt_local.filetype = "sh.PKGBUILD"
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter", "BufNewFile" }, {
+  pattern = {
+    "*.ebuild",
+    "*.eclass",
+    "color.map",
+    "make.conf",
+  },
+  callback = function()
+    vim.opt_local.filetype = "sh.ebuild"
+  end,
+})
+
 -- no diagnostics on repl
 vim.api.nvim_create_autocmd("BufNewFile", {
   group = vim.api.nvim_create_augroup("conjure_log_disable_lsp", { clear = true }),

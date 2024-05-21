@@ -14,13 +14,13 @@ noextract=("$pkgname-$pkgver.tgz")
 sha256sums=("96777dd15b044556774aa00a94ff64cd5e53660aa3bf3994ad321bc1bfec6ec7")
 
 prepare() {
-    mkdir "$pkgname-$pkgver"
-    mv "$pkgname-$pkgver.tgz" "$pkgname-$pkgver"
-    cd "$pkgname-$pkgver"
-    tar -xzf "$pkgname-$pkgver.tgz"
+	mkdir "$pkgname-$pkgver"
+	mv "$pkgname-$pkgver.tgz" "$pkgname-$pkgver"
+	cd "$pkgname-$pkgver"
+	tar -xzf "$pkgname-$pkgver.tgz"
 }
 
 package() {
-    cd "$pkgname-$pkgver"
-    install -Dm755 ./odoo-lsp "$pkgdir/usr/bin/odoo-lsp"
+	cd "$pkgname-$pkgver"
+	install -Dm755 ./odoo-lsp "$pkgdir/usr/bin/odoo-lsp"
 }

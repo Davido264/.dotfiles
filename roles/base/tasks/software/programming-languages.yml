@@ -77,8 +77,6 @@
       - kotlin
     state: present
 
-# TODO: Install spyglassmc
-
 - name: Install Python Tooling
   community.general.pacman:
     name:
@@ -88,6 +86,7 @@
       - python-ipykernel
       - python-ipympl
       - python-ipywidgets
+      - jupyter-notebook
     state: present
 
 
@@ -111,6 +110,13 @@
     - Add java plugin
     - Add javascript plugin
     - Add asdf direnv integration
+
+- name: Install LSP for PKGBUILD, since Mason doesn't provide it
+  become_user: david
+  become: false
+  kewlfft.aur.aur:
+    name: termux-language-server
+    state: present
 
 
 # TODO: LaTeX
