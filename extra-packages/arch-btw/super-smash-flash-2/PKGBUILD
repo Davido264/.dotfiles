@@ -34,13 +34,13 @@ prepare() {
 	tar -xf "SSF2BetaLinux.v${pkgver}.tar"
 
 	# Setting to trust location of the libraries
-	echo "$pkgdir/usr/share/SSF2/data" >>"SSF2.cfg"
+	echo "/usr/share/SSF2/data" >>"SSF2.cfg"
 
 	# SSF2 executable fails when its executed outside its directory,
 	# So this script wrapper ensures the executable runs correctly
 	echo "
     #!/bin/sh
-    cd '$pkgdir/usr/share/SSF2/data'
+    cd '/usr/share/SSF2/data'
     ./SSF2
     " >>./SSF2.sh
 
@@ -51,7 +51,7 @@ prepare() {
     Terminal=false
     Exec=/usr/bin/SSF2
     Name=Super Smash Flash 2
-    Icon=$pkgdir/usr/share/SSF2/ssf2.jpg
+    Icon=/usr/share/SSF2/ssf2.jpg
     " >>super-smash-flash-2.desktop
 }
 
