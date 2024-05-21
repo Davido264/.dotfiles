@@ -44,6 +44,7 @@ return {
 
       -- LaTeX
       "bibtex",
+      "latex",
 
       -- Javascript/Typescript
       "javascript",
@@ -90,6 +91,10 @@ return {
       "gitcommit",
       "gitignore",
 
+      -- Scheme
+      "scheme",
+
+
       -- Other
       "bass",
       "beancount",
@@ -102,10 +107,8 @@ return {
       "hyprlang",
       "ini",
       "make",
-      "meson",
       "query",
       "regex",
-      "scheme",
       "templ",
       "tsv",
       "vim",

@@ -51,11 +51,19 @@ return {
       silent = true,
     },
     {
-      "<leader>h",
+      "<leader>vo",
       function()
         require("telescope.builtin").vim_options()
       end,
       desc = "Vim Options",
+      silent = true,
+    },
+    {
+      "<leader>h",
+      function()
+        require("telescope.builtin").help_tags()
+      end,
+      desc = "Help Tags",
       silent = true,
     },
   },

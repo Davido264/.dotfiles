@@ -57,7 +57,7 @@ if [ ! -f ._not_first_time ]; then
 fi
 
 if [ ! -f ._not_first_time ]; then
-	exec "$dir/nvim-setup.sh"
+	nvim --headless
 fi
 
 if [ ! -f ._not_first_time ]; then

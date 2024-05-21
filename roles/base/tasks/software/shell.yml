@@ -51,6 +51,7 @@
       - yt-dlp
       - graphviz
       - ripgrep # required for neovim
+      - tree-sitter-cli # required for neovim
     state: present
 
 - name: Install Neovim Nightly (bleething edge >:])
