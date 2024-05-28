@@ -6,6 +6,14 @@
     enabled: true
     state: started
 
+- name: Create .docker directory
+  ansible.builtin.file:
+    path: /home/david/.docker/
+    state: directory
+    owner: david
+    group: david
+    mode: '0770'
+
 - name: Install distrobox
   community.general.pacman:
     name: distrobox

@@ -7,6 +7,17 @@
     - Is ags a better option overall? 🤔
 
 
+# Ideas for dotfiles
+- [ ] SMS notifications when ansible finishes, notifying success or failure
+- [ ] Move all to ansible, so there is more instructions after ansible finishes
+- [ ] Create tags to modularize ansible setup
+- [ ] create an fzf script (and maybe assign key-binds) to:
+    - [ ] launch apps
+    - [ ] launch repositories
+    - [ ] launch bookmarks
+
+
+
 # Maybe?
 - create queries for mcfunction
 

@@ -8,7 +8,7 @@ arch=("$CARCH")
 url="https://www.supersmashflash.com/"
 license=('custom')
 groups=()
-depends=('gtk2' 'libvdpau')
+depends=('gtk2' 'lib32-libvdpau')
 makedepends=('tar')
 
 source=(
@@ -28,8 +28,10 @@ sha256sums=(
 
 prepare() {
 	mkdir "$pkgname-$pkgver"
+
 	mv "SSF2BetaLinux.v${pkgver}.tar" "$pkgname-$pkgver/"
 	mv "dpmR-CI3_400x400.jpg" "$pkgname-$pkgver/ssf2.jpg"
+
 	cd "$pkgname-$pkgver"
 	tar -xf "SSF2BetaLinux.v${pkgver}.tar"
 
@@ -40,7 +42,7 @@ prepare() {
 	# So this script wrapper ensures the executable runs correctly
 	echo "
     #!/bin/sh
-    cd '/usr/share/SSF2/data'
+    cd '/usr/share/SSF2'
     ./SSF2
     " >>./SSF2.sh
 
@@ -58,10 +60,13 @@ prepare() {
 package() {
 	cd "$pkgname-$pkgver"
 
+	mkdir -p "$pkgdir/usr/share/SSF2/data"
+	cp -r ./data/* "$pkgdir/usr/share/SSF2/data"
+	chmod -R 755 "$pkgdir/usr/share/SSF2/data"
+
 	install -Dm 755 ./SSF2.sh "$pkgdir/usr/bin/SSF2"
-	install -dDm 755 ./data "$pkgdir/usr/share/SSF2/data"
 	install -Dm 755 ./SSF2 "$pkgdir/usr/share/SSF2/SSF2"
-	install -Dm 655 ./ssf2.jpg "$pkgdir/usr/share/SSF2/ssf2.jpg"
-	install -Dm 755 ./super-smash-flash-2.desktop "$pkgdir/usr/share/applications/super-smash-flash-2.desktop"
-	install -Dm 655 ./SSF2.cfg "$pkgdir/etc/adobe/FlashPlayerTrust/SSF2.cfg"
+	install -Dm 644 ./ssf2.jpg "$pkgdir/usr/share/SSF2/ssf2.jpg"
+	install -Dm 644 ./super-smash-flash-2.desktop "$pkgdir/usr/share/applications/super-smash-flash-2.desktop"
+	install -Dm 644 ./SSF2.cfg "$pkgdir/etc/adobe/FlashPlayerTrust/SSF2.cfg"
 }

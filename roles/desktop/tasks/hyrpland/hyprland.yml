@@ -76,6 +76,7 @@
       - nwg-displays
       - nwg-look-bin
       - swww
+      - pyprland
     state: present
 
 - name: Install fonts

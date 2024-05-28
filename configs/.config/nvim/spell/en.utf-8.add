@@ -634,3 +634,7 @@ NVIM
 Odoo
 treesitter
 PKGBUILD
+ACL
+EntityFramework
+ansible
+fzf

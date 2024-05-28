@@ -81,8 +81,11 @@
   community.general.pacman:
     name:
       - python
+      - python-setuptools
       - python-requests
       - python-numpy
+      - python-pandas
+      - python-matplotlib
       - python-ipykernel
       - python-ipympl
       - python-ipywidgets
@@ -109,6 +112,7 @@
     - Add python plugin
     - Add java plugin
     - Add javascript plugin
+    - Add dotnet plugin
     - Add asdf direnv integration
 
 - name: Install LSP for PKGBUILD, since Mason doesn't provide it

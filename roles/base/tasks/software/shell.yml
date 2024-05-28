@@ -22,8 +22,7 @@
       - stow
       - uwufetch
       - zsh
-      - zsh-completions
-      - zsh-syntax-highlighting
+      - sshpass
     state: present
 
 - name: Install shell applications (AUR)
@@ -52,6 +51,11 @@
       - graphviz
       - ripgrep # required for neovim
       - tree-sitter-cli # required for neovim
+    state: present
+
+- name: Install Tmuxinator
+  kewlfft.aur.aur:
+    name: tmuxinator
     state: present
 
 - name: Install Neovim Nightly (bleething edge >:])

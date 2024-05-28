@@ -12,7 +12,7 @@ function M.setup()
     desc = "Setup jdtls",
     pattern = "java",
     callback = function()
-      local jdtlspath = vim.fn.stdpath "data" .. "/mason/packages/jdtls"
+      local jdtlspath = require("mason-registry").get_package("jdtls"):get_install_path()
       local path_to_lsp_server = ""
 
       if vim.fn.has "win32" == 1 then
@@ -131,6 +131,7 @@ function M.setup()
         flags = {
           allow_incremental_sync = true,
         },
+
         -- Language server `initializationOptions`
         -- You need to extend the `bundles` with paths to jar files
         -- if you want to use additional eclipse.jdt.ls plugins.

@@ -1,4 +1,7 @@
 return {
+  cmd = {
+    require("mason-registry").get_package("omnisharp"):get_install_path() .. "/omnisharp"
+  },
   handlers = {
     ["textDocument/definition"] = require("omnisharp_extended").definition_handler,
     ["textDocument/typeDefinition"] = require("omnisharp_extended").type_definition_handler,

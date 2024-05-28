@@ -24,6 +24,14 @@
     executable: /bin/sh
     cmd: 'export ASDF_DIR="$HOME/.local/share/asdf"; . "$HOME/.local/share/asdf/asdf.sh"; asdf plugin add nodejs && asdf global python system'
 
+- name: Add dotnet plugin
+  become_user: david
+  become: false
+  changed_when: true
+  ansible.builtin.shell:
+    executable: /bin/sh
+    cmd: 'export ASDF_DIR="$HOME/.local/share/asdf"; . "$HOME/.local/share/asdf/asdf.sh"; asdf plugin add dotnet'
+
 - name: Add asdf direnv integration
   become_user: david
   become: false

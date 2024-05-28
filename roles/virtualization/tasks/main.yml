@@ -11,6 +11,7 @@
     - Enable docker.service
     - Install distrobox
     - Setting docker group
+    - Create .docker directory
 
 - name: Install KVM, libvirt, guesttools and virt-manager
   community.general.pacman:

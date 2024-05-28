@@ -2,23 +2,38 @@
 - name: Smol David vm
   hosts: vm
   become: true
-  # TODO?
+  # TODO: It will be cool :)
   # roles:
   #   - base
   #   - desktop
   #   - gaming
   #   - music
   #   - virtualization
+  vars_prompt:
+    - name: hostname
+      prompt: Hostname for the VM
+      private: false
 
   tasks:
+    - name: Set Hostname
+      ansible.builtin.hostname:
+        name: '{{ hostname }}'
+
     - name: Update pkgs
       ansible.builtin.dnf:
         update_cache: true
         update_only: true
         state: present
 
+    - name: Install epel release
+      ansible.builtin.dnf:
+        name:
+          - epel-release
+        state: present
+
     - name: Install cool and funny pkgs
       ansible.builtin.dnf:
+        disable_gpg_check: true
         name:
           - fzf
           - fastfetch
@@ -31,13 +46,42 @@
           - htop
         state: present
 
-    - name: Enable virtualization
+    # - name: Enable virtualization
+    #   ansible.builtin.dnf:
+    #     disable_gpg_check: true
+    #     name: '@virtualization'
+    #     state: present
+    #   notify: Start services
+
+    - name: Install httpd
       ansible.builtin.dnf:
-        name: '@Virtualization'
+        name:
+          - httpd
+          - php-mysqlnd
         state: present
-      notify: Start services
+      notify: Install php and mariadb
 
   handlers:
+    - name: Install php and mariadb
+      ansible.builtin.shell:
+        cmd: |
+          crb enable
+          dnf module enable -y mariadb:10.11
+          dnf module enable -y php:8.1
+          dnf module install -y mariadb:10.11
+          dnf module install -y php:8.1
+      changed_when: true
+      notify: Start http services
+
+    - name: Start http services
+      ansible.builtin.service:
+        name: '{{ item }}'
+        enabled: true
+        state: started
+      loop:
+        - mariadb
+        - httpd
+
     - name: Start services
       ansible.builtin.service:
         name: '{{ item }}'

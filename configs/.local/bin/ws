@@ -1,48 +1,46 @@
 #!/bin/sh
 
-if [ $# -eq 1 ]; then
-    selected=$1
-else
-    selected=$(find -L\
-        ~/Src \
-        ~/Src/personal \
-        ~/Src/college \
-        ~/Src/work \
-        ~/Documents/personal \
-        ~/Documents/college \
-        ~/Documents/college/seguridad_ti \
-        ~/Documents/college/auditoria_ti \
-        ~/Documents/college/servidores \
-        ~/Documents/work \
-        ~/Documents/archived \
-        ~/Documents/tmp \
-        ~/Documents/notebook \
-        ~/Music \
-        ~/Music/sessions \
-        ~/Music/projects \
-        ~/Music/library \
-        ~/Pictures/tmp \
-        ~/Videos/tmp \
-        ~/Documents/personal/backups \
-        ~/Documents/archived \
-        ~/Documents/tmp \
-        -mindepth 1 -maxdepth 1 -type d 2>/dev/null | fzf)
-fi
+# Took inspiration from
+# https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/scripts/tmux-sessionizer
+# and
+# https://arthurjordao.dev/posts/tmux-tmuxinator-fzf-workflow/
+
+selected=$(find -L ~/Src \
+	~/Src/personal \
+	~/Src/college \
+	~/Src/work \
+	~/Documents/personal \
+	~/Documents/college \
+	~/Documents/college/seguridad_ti \
+	~/Documents/college/auditoria_ti \
+	~/Documents/college/servidores \
+	~/Documents/work \
+	~/Documents/archived \
+	~/Documents/tmp \
+	~/Documents/notebook \
+	~/Music \
+	~/Music/sessions \
+	~/Music/projects \
+	~/Music/library \
+	~/Pictures/tmp \
+	~/Videos/tmp \
+	~/Documents/personal/backups \
+	~/Documents/archived \
+	~/Documents/tmp \
+	-mindepth 1 -maxdepth 1 -type d 2>/dev/null | fzf +m -1 -q "$1")
 
 if [ -z "$selected" ]; then
-    exit 0
+	exit 0
 fi
 
 selected_name=$(basename "$selected" | tr . _)
-tmux_running=$(pgrep tmux)
+tmux_config_file="$selected/.tmuxinator.yml"
 
-if [ -z "$TMUX" ] && [ -z "$tmux_running" ]; then
-    tmux new-session -s "$selected_name" -c "$selected"
-    exit 0
+if [ -f "$tmux_config_file" ]; then
+	cd "$selected" 2>/dev/null 1>&2
+	tmuxinator local
+	# shellcheck disable=SC2103
+	cd - 2>/dev/null 1>&2
+else
+	tmuxinator start default -n "$selected_name" workspace="$selected"
 fi
-
-if ! tmux has-session -t="$selected_name" 2> /dev/null; then
-    tmux new-session -ds "$selected_name" -c "$selected"
-fi
-
-tmux switch-client -t "$selected_name"

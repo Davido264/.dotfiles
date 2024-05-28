@@ -1,6 +1,12 @@
 source ~/.profile
 setopt interactivecomments
-eval "$(starship init zsh)"
+
+# Check that the function `starship_zle-keymap-select()` is defined.
+# xref: https://github.com/starship/starship/issues/3418
+type starship_zle-keymap-select >/dev/null || \
+  {
+    eval "$(starship init zsh)"
+  }
 
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share/}/zsh/zinit.git"
 
@@ -54,6 +60,14 @@ smolfetch
 
 eval "$(direnv hook zsh)"
 
+# pnpm
+export PNPM_HOME="/home/david/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
 if [ -f ~/.local/share/asdf/asdf.sh ]; then
-    . ~/.local/share/asdf/asdf.sh
+    source ~/.local/share/asdf/asdf.sh
 fi

@@ -1,2 +1,12 @@
 [local]
 localhost
+
+[vm]
+192.168.122.24
+
+[vm:vars]
+ansible_connection=ssh
+ansible_user=root
+ansible_ssh_pass=root
+
+# vim: ft=ini

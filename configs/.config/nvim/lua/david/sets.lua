@@ -123,3 +123,9 @@ set.guifont = "Mononoki NF:h13"
 set.foldmethod = "expr"
 set.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 set.foldenable = false
+
+-- disable providers
+gset.loaded_node_provider = 0
+gset.loaded_perl_provider = 0
+gset.loaded_python3_provider = 0
+gset.loaded_ruby_provider = 0
